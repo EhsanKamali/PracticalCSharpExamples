@@ -1,0 +1,20 @@
+E:\Program Files\Visual Studio 2015\Project\Templates\Example2\bin\Debug\Example2.exe.config
+E:\Program Files\Visual Studio 2015\Project\Templates\Example2\bin\Debug\Example2.exe
+E:\Program Files\Visual Studio 2015\Project\Templates\Example2\bin\Debug\Example2.pdb
+E:\Program Files\Visual Studio 2015\Project\Templates\Example2\obj\Debug\Example2.csprojAssemblyReference.cache
+E:\Program Files\Visual Studio 2015\Project\Templates\Example2\obj\Debug\Example2.Form1.resources
+E:\Program Files\Visual Studio 2015\Project\Templates\Example2\obj\Debug\Example2.Properties.Resources.resources
+E:\Program Files\Visual Studio 2015\Project\Templates\Example2\obj\Debug\Example2.csproj.GenerateResource.cache
+E:\Program Files\Visual Studio 2015\Project\Templates\Example2\obj\Debug\Example2.csproj.CoreCompileInputs.cache
+E:\Program Files\Visual Studio 2015\Project\Templates\Example2\obj\Debug\Example2.exe
+E:\Program Files\Visual Studio 2015\Project\Templates\Example2\obj\Debug\Example2.pdb
+E:\Repository\GitHub\CSharpProjects\Examples\Example2\bin\Debug\Example2.exe.config
+E:\Repository\GitHub\CSharpProjects\Examples\Example2\bin\Debug\Example2.exe
+E:\Repository\GitHub\CSharpProjects\Examples\Example2\bin\Debug\Example2.pdb
+E:\Repository\GitHub\CSharpProjects\Examples\Example2\obj\Debug\Example2.csprojAssemblyReference.cache
+E:\Repository\GitHub\CSharpProjects\Examples\Example2\obj\Debug\Example2.Form1.resources
+E:\Repository\GitHub\CSharpProjects\Examples\Example2\obj\Debug\Example2.Properties.Resources.resources
+E:\Repository\GitHub\CSharpProjects\Examples\Example2\obj\Debug\Example2.csproj.GenerateResource.cache
+E:\Repository\GitHub\CSharpProjects\Examples\Example2\obj\Debug\Example2.csproj.CoreCompileInputs.cache
+E:\Repository\GitHub\CSharpProjects\Examples\Example2\obj\Debug\Example2.exe
+E:\Repository\GitHub\CSharpProjects\Examples\Example2\obj\Debug\Example2.pdb
