@@ -1,0 +1,10 @@
+E:\Repository\GitHub\PracticalExamples\PracticalExamples\Examples\CSharp\Example4\bin\Debug\Example4.exe.config
+E:\Repository\GitHub\PracticalExamples\PracticalExamples\Examples\CSharp\Example4\bin\Debug\Example4.exe
+E:\Repository\GitHub\PracticalExamples\PracticalExamples\Examples\CSharp\Example4\bin\Debug\Example4.pdb
+E:\Repository\GitHub\PracticalExamples\PracticalExamples\Examples\CSharp\Example4\obj\Debug\Example4.csprojAssemblyReference.cache
+E:\Repository\GitHub\PracticalExamples\PracticalExamples\Examples\CSharp\Example4\obj\Debug\Example4.Form1.resources
+E:\Repository\GitHub\PracticalExamples\PracticalExamples\Examples\CSharp\Example4\obj\Debug\Example4.Properties.Resources.resources
+E:\Repository\GitHub\PracticalExamples\PracticalExamples\Examples\CSharp\Example4\obj\Debug\Example4.csproj.GenerateResource.cache
+E:\Repository\GitHub\PracticalExamples\PracticalExamples\Examples\CSharp\Example4\obj\Debug\Example4.csproj.CoreCompileInputs.cache
+E:\Repository\GitHub\PracticalExamples\PracticalExamples\Examples\CSharp\Example4\obj\Debug\Example4.exe
+E:\Repository\GitHub\PracticalExamples\PracticalExamples\Examples\CSharp\Example4\obj\Debug\Example4.pdb
