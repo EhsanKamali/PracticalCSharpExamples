@@ -10,11 +10,11 @@ namespace Example4
         private string Op;
         private Boolean Flag;
 
-        private void OperationFunction(object sender, EventArgs e)
+        private void OperationFunction(object sender, MouseEventArgs e)
         {
             if (Op != null)
             {
-                buttonEqual_Click(null, null);
+                buttonEqual_MouseClick(null, null);
             }
             x = Convert.ToDouble(textBoxInput.Text);
             Op = ((Button)sender).Text;
@@ -24,9 +24,16 @@ namespace Example4
             Flag = true;
         }
 
-        private void buttonEqual_Click(object sender, EventArgs e)
+        private void buttonEqual_MouseClick(object sender, MouseEventArgs e)
         {
-            y = Convert.ToDouble(textBoxInput.Text);
+            if (textBoxInput.Text != string.Empty)
+            {
+                y = Convert.ToDouble(textBoxInput.Text);
+            }
+            else
+            {
+                y = 0;
+            }
 
             switch (Op)
             {
@@ -96,7 +103,7 @@ namespace Example4
                     x.Focus();
                     x.ForeColor = Color.Red;
                 }
-                else 
+                else
                 {
                     x.ForeColor = Color.Black;
                 }
@@ -115,7 +122,7 @@ namespace Example4
             else if (e.KeyChar == '=')
             {
                 //chon az sender estefade nakardim mitonim hardo ghesmat ro null bedim
-                buttonEqual_Click(null, null);
+                buttonEqual_MouseClick(null, null);
             }
             else if (e.KeyChar == '.' && !textBoxInput.Text.Contains("."))
             {
@@ -137,7 +144,32 @@ namespace Example4
             buttonBackSpace.Enabled = false;
         }
 
-        private void NumbersFunction(object sender, EventArgs e)
+        private void Form1_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                buttonEqual_MouseClick(null, null);
+                buttonEqual.Focus();
+                buttonEqual.ForeColor = Color.Red;
+            }
+        }
+
+        private void buttonOnOff_Click(object sender, EventArgs e)
+        {
+            panel1.Visible = !panel1.Visible;
+            this.KeyPreview = !this.KeyPreview;
+
+            if (buttonOnOff.Text == "ON")
+            {
+                buttonOnOff.Text = "OFF";
+            }
+            else
+            {
+                buttonOnOff.Text = "ON";
+            }
+        }
+
+        private void NumbersFunction(object sender, MouseEventArgs e)
         {
             if (Flag)
             {
