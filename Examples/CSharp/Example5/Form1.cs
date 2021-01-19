@@ -38,5 +38,23 @@ namespace Example5
         {
             statusStrip1.Visible = statusBarToolStripMenuItem.Checked;
         }
+
+        private void foreColorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+             colorDialog1.ShowDialog();
+            //با این گزینه یک فرم انتخاب رنگ باز می شود
+            textBoxNotePad.ForeColor = colorDialog1.Color;
+            
+        }
+
+        private void fontToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //فونت پیش فرض همون فونت جاری نشان داده می شود
+            fontDialog1.Font = textBoxNotePad.Font;
+            //پنجره نمایش فونت ها را نشان می دهد
+            fontDialog1.ShowDialog();
+            //مقدار فونت نمایش را با خروجی انتخاب از فرم برابر قرار می دیم
+            textBoxNotePad.Font = fontDialog1.Font;
+        }
     }
 }
