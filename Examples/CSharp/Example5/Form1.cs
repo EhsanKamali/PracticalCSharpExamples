@@ -261,13 +261,13 @@ namespace Example5
             }
         }
 
-        public int FindNextFunction(string FindString, int StartIndex)
+        public int FindNextFunction(string FindString, int StartIndex,StringComparison sc)
         {
             int FindIndex;
-            FindIndex = textBoxNotePad.Text.IndexOf(FindString, StartIndex + FindString.Length);
+            FindIndex = textBoxNotePad.Text.IndexOf(FindString, StartIndex + FindString.Length,sc);
             if (FindIndex == -1)
             {
-                MessageBox.Show("Not Fund", "Find Result");
+                MessageBox.Show("Not Found", "Find Result");
                 return FindIndex;
             }
             else

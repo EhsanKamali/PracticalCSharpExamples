@@ -17,8 +17,16 @@ namespace Example5
         int FindIndex = 0;
         private void buttonFindNext_Click(object sender, EventArgs e)
         {
-            
-            FindIndex = FrmMain.FindNextFunction(textBoxFindWhat.Text, FindIndex);
+            StringComparison sc;
+            if(checkBoxMatchCase.Checked)
+            {
+                sc = StringComparison.Ordinal;
+            }
+            else
+            {
+                sc = StringComparison.OrdinalIgnoreCase;
+            }
+            FindIndex = FrmMain.FindNextFunction(textBoxFindWhat.Text, FindIndex,sc);
             //FrmMain.FindFunction(textBoxFindWhat.Text);
         }
 
