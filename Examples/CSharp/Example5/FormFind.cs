@@ -14,11 +14,14 @@ namespace Example5
             FrmMain = Frm;
             InitializeComponent();
         }
-        int FindIndex = 0;
+
+        private int FindIndex = 0;
+
         private void buttonFindNext_Click(object sender, EventArgs e)
         {
             StringComparison sc;
-            if(checkBoxMatchCase.Checked)
+            Boolean RightToLeft;
+            if (checkBoxMatchCase.Checked)
             {
                 sc = StringComparison.Ordinal;
             }
@@ -26,7 +29,16 @@ namespace Example5
             {
                 sc = StringComparison.OrdinalIgnoreCase;
             }
-            FindIndex = FrmMain.FindNextFunction(textBoxFindWhat.Text, FindIndex,sc);
+
+            if (radioButtonDown.Checked)
+            {
+                RightToLeft = true;
+            }
+            else
+            {
+                RightToLeft = false;
+            }
+            FindIndex = FrmMain.FindNextFunction(textBoxFindWhat.Text, FindIndex, sc, RightToLeft);
             //FrmMain.FindFunction(textBoxFindWhat.Text);
         }
 

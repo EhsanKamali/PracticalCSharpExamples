@@ -9,6 +9,53 @@ namespace Example5
     {
         private string FilePath;
         private Boolean SaveFlag;
+        MyUndo NotePadUndo = new MyUndo();
+
+        //کلاسی ایجاد می کنیم تا برگشت ها را کنترل کنیم و بعدا از روی آن شی دیگری تعریف کنیم
+        public class MyUndo
+        {
+            string[] Temp = new string[100];
+            int Index;
+            int CurrentPosition;
+
+            public MyUndo()
+            {
+                Index = 0;
+                CurrentPosition = 0;
+
+            }
+
+            public void SetText(string s)
+            {
+                Temp[Index] = s;
+                CurrentPosition = Index;
+                ++Index;
+            }
+
+            public string Undo()
+            {
+                if (CurrentPosition > 0)
+                {
+                    return Temp[--CurrentPosition];
+                }
+                else
+                {
+                    return null;
+                }
+            }
+
+            public string Redo()
+            {
+                if (CurrentPosition < Index)
+                {
+                    return Temp[++CurrentPosition];
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
 
         public Form1()
         {
@@ -261,10 +308,28 @@ namespace Example5
             }
         }
 
-        public int FindNextFunction(string FindString, int StartIndex,StringComparison sc)
+        /// <summary>
+        /// متدی برای جستجو در متن
+        /// </summary>
+        /// <param name="FindString">رشته مورد جستجو</param>
+        /// <param name="StartIndex">ایندکس شروع</param>
+        /// <param name="sc">نوع مقایسه که حساس به حروف کوچک و بزرگ باشد یا نه</param>
+        /// <param name="RightToLeft">جستجو راست به چپ یا چپ به راست</param>
+        /// <returns></returns>
+        public int FindNextFunction(string FindString, int StartIndex,
+            StringComparison sc,Boolean RightToLeft)
         {
             int FindIndex;
-            FindIndex = textBoxNotePad.Text.IndexOf(FindString, StartIndex + FindString.Length,sc);
+            if (RightToLeft)
+            {
+                FindIndex = textBoxNotePad.Text.IndexOf(FindString, 
+                    StartIndex + FindString.Length, sc);
+            }
+            else
+            {
+                FindIndex = textBoxNotePad.Text.LastIndexOf(FindString, 
+                    StartIndex + FindString.Length, sc);
+            }
             if (FindIndex == -1)
             {
                 MessageBox.Show("Not Found", "Find Result");
@@ -280,6 +345,22 @@ namespace Example5
                 textBoxNotePad.Focus();
                 return FindIndex;
             }
+        }
+
+        private void undoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            textBoxNotePad.Text = NotePadUndo.Undo();
+        }
+
+        private void redoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            textBoxNotePad.Text = NotePadUndo.Redo();
+        }
+
+        private void Form1_KeyUp(object sender, KeyEventArgs e)
+        {
+            //KeyPreview را برای فرم فعال میکنیم
+            NotePadUndo.SetText(textBoxNotePad.Text);
         }
     }
 }
