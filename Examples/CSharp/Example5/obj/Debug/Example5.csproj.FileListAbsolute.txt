@@ -1,11 +1,11 @@
 E:\Repository\GitHub\PracticalCSharpExamples\Examples\CSharp\Example5\bin\Debug\Example5.exe.config
 E:\Repository\GitHub\PracticalCSharpExamples\Examples\CSharp\Example5\bin\Debug\Example5.exe
 E:\Repository\GitHub\PracticalCSharpExamples\Examples\CSharp\Example5\bin\Debug\Example5.pdb
-E:\Repository\GitHub\PracticalCSharpExamples\Examples\CSharp\Example5\obj\Debug\Example5.csprojAssemblyReference.cache
 E:\Repository\GitHub\PracticalCSharpExamples\Examples\CSharp\Example5\obj\Debug\Example5.Form1.resources
+E:\Repository\GitHub\PracticalCSharpExamples\Examples\CSharp\Example5\obj\Debug\Example5.FormFind.resources
+E:\Repository\GitHub\PracticalCSharpExamples\Examples\CSharp\Example5\obj\Debug\Example5.FormReplace.resources
 E:\Repository\GitHub\PracticalCSharpExamples\Examples\CSharp\Example5\obj\Debug\Example5.Properties.Resources.resources
 E:\Repository\GitHub\PracticalCSharpExamples\Examples\CSharp\Example5\obj\Debug\Example5.csproj.GenerateResource.cache
 E:\Repository\GitHub\PracticalCSharpExamples\Examples\CSharp\Example5\obj\Debug\Example5.csproj.CoreCompileInputs.cache
 E:\Repository\GitHub\PracticalCSharpExamples\Examples\CSharp\Example5\obj\Debug\Example5.exe
 E:\Repository\GitHub\PracticalCSharpExamples\Examples\CSharp\Example5\obj\Debug\Example5.pdb
-E:\Repository\GitHub\PracticalCSharpExamples\Examples\CSharp\Example5\obj\Debug\Example5.FormFind.resources

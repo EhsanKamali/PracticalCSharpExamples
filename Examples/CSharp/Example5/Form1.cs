@@ -9,20 +9,19 @@ namespace Example5
     {
         private string FilePath;
         private Boolean SaveFlag;
-        MyUndo NotePadUndo = new MyUndo();
+        private MyUndo NotePadUndo = new MyUndo();
 
         //کلاسی ایجاد می کنیم تا برگشت ها را کنترل کنیم و بعدا از روی آن شی دیگری تعریف کنیم
         public class MyUndo
         {
-            string[] Temp = new string[100];
-            int Index;
-            int CurrentPosition;
+            private string[] Temp = new string[100];
+            private int Index;
+            private int CurrentPosition;
 
             public MyUndo()
             {
                 Index = 0;
                 CurrentPosition = 0;
-
             }
 
             public void SetText(string s)
@@ -281,6 +280,8 @@ namespace Example5
 
         private void replaceToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            FormReplace formReplace = new FormReplace(this);
+            formReplace.Show(this);
         }
 
         private void goToToolStripMenuItem_Click(object sender, EventArgs e)
@@ -317,17 +318,17 @@ namespace Example5
         /// <param name="RightToLeft">جستجو راست به چپ یا چپ به راست</param>
         /// <returns></returns>
         public int FindNextFunction(string FindString, int StartIndex,
-            StringComparison sc,Boolean RightToLeft)
+            StringComparison sc, Boolean RightToLeft)
         {
             int FindIndex;
             if (RightToLeft)
             {
-                FindIndex = textBoxNotePad.Text.IndexOf(FindString, 
+                FindIndex = textBoxNotePad.Text.IndexOf(FindString,
                     StartIndex + FindString.Length, sc);
             }
             else
             {
-                FindIndex = textBoxNotePad.Text.LastIndexOf(FindString, 
+                FindIndex = textBoxNotePad.Text.LastIndexOf(FindString,
                     StartIndex + FindString.Length, sc);
             }
             if (FindIndex == -1)
@@ -361,6 +362,37 @@ namespace Example5
         {
             //KeyPreview را برای فرم فعال میکنیم
             NotePadUndo.SetText(textBoxNotePad.Text);
+        }
+
+        /// <summary>
+        /// متدی برای جایگزین کردن متن انتخابی
+        /// </summary>
+        /// <param name="ReplaceString">رشته مورد نظر که میخواهیم جایگزین متن انتخاب شده شود</param>
+        public void ReplaceFunction(string ReplaceString)
+        {
+            //متنی انتخاب شده است
+            if (textBoxNotePad.SelectionLength > 0)
+            {
+                textBoxNotePad.SelectedText = ReplaceString;
+            }
+        }
+
+        /// <summary>
+        /// متدی برای جایگزین کردن همه موارد
+        /// </summary>
+        /// <param name="str1">رشته مورد جستجو</param>
+        /// <param name="str2">رشته جایگزین</param>
+        /// <param name="sc">نوع مقایسه</param>
+        /// <param name="LeftToRight">جهت مقایسه</param>
+        public void ReplaceAllFunction(string str1, string str2, StringComparison sc,
+            Boolean LeftToRight)
+        {
+            while (Convert.ToBoolean(FindNextFunction(str1, 0, sc, LeftToRight)))
+            {
+                ReplaceFunction(str2);
+            };
+
+            
         }
     }
 }

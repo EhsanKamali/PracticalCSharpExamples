@@ -15,6 +15,16 @@ namespace Example5
             InitializeComponent();
         }
 
+        //این رو میسازیم تا وقتی از روی این فرم یک فرم دیگه میسازیم
+        //بهمون خطا نده که پیش فرض خالی نیست و حتما باید بهش یک مقدار بدیم
+        //پس یک کانستراکتور مثل قبلی میسازیم اما این یکی با پارامتر خالی
+        //که به عنوان پیش فرض بشه تا بتونیم از روی این فرم یک فرم وراثت یافته بسازیم
+        //موقع ساختن اگر بازم خطا داشت یک بار Clean و بعدش یک بار Build انجام بدیم
+        public FormFind()
+        {
+            InitializeComponent();
+        }
+
         private int FindIndex = 0;
 
         private void buttonFindNext_Click(object sender, EventArgs e)

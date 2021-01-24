@@ -35,8 +35,8 @@ namespace Example5
             this.buttonCancel = new System.Windows.Forms.Button();
             this.checkBoxMatchCase = new System.Windows.Forms.CheckBox();
             this.groupBoxDirection = new System.Windows.Forms.GroupBox();
-            this.radioButtonUp = new System.Windows.Forms.RadioButton();
             this.radioButtonDown = new System.Windows.Forms.RadioButton();
+            this.radioButtonUp = new System.Windows.Forms.RadioButton();
             this.groupBoxDirection.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -97,16 +97,6 @@ namespace Example5
             this.groupBoxDirection.TabStop = false;
             this.groupBoxDirection.Text = "Direction";
             // 
-            // radioButtonUp
-            // 
-            this.radioButtonUp.AutoSize = true;
-            this.radioButtonUp.Location = new System.Drawing.Point(12, 32);
-            this.radioButtonUp.Name = "radioButtonUp";
-            this.radioButtonUp.Size = new System.Drawing.Size(39, 17);
-            this.radioButtonUp.TabIndex = 0;
-            this.radioButtonUp.Text = "Up";
-            this.radioButtonUp.UseVisualStyleBackColor = true;
-            // 
             // radioButtonDown
             // 
             this.radioButtonDown.AutoSize = true;
@@ -118,6 +108,16 @@ namespace Example5
             this.radioButtonDown.TabStop = true;
             this.radioButtonDown.Text = "Down";
             this.radioButtonDown.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonUp
+            // 
+            this.radioButtonUp.AutoSize = true;
+            this.radioButtonUp.Location = new System.Drawing.Point(12, 32);
+            this.radioButtonUp.Name = "radioButtonUp";
+            this.radioButtonUp.Size = new System.Drawing.Size(39, 17);
+            this.radioButtonUp.TabIndex = 0;
+            this.radioButtonUp.Text = "Up";
+            this.radioButtonUp.UseVisualStyleBackColor = true;
             // 
             // FormFind
             // 
@@ -141,13 +141,13 @@ namespace Example5
 
         #endregion
 
-        private System.Windows.Forms.Label labelFindWhat;
-        private System.Windows.Forms.TextBox textBoxFindWhat;
-        private System.Windows.Forms.Button buttonFindNext;
-        private System.Windows.Forms.Button buttonCancel;
-        private System.Windows.Forms.CheckBox checkBoxMatchCase;
-        private System.Windows.Forms.GroupBox groupBoxDirection;
-        private System.Windows.Forms.RadioButton radioButtonDown;
-        private System.Windows.Forms.RadioButton radioButtonUp;
+        protected System.Windows.Forms.Label labelFindWhat;
+        protected System.Windows.Forms.TextBox textBoxFindWhat;
+        protected System.Windows.Forms.Button buttonFindNext;
+        protected System.Windows.Forms.Button buttonCancel;
+        protected System.Windows.Forms.CheckBox checkBoxMatchCase;
+        protected System.Windows.Forms.GroupBox groupBoxDirection;
+        protected System.Windows.Forms.RadioButton radioButtonDown;
+        protected System.Windows.Forms.RadioButton radioButtonUp;
     }
 }

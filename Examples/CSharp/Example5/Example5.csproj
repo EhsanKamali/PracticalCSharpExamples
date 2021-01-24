@@ -58,6 +58,12 @@
     <Compile Include="FormFind.Designer.cs">
       <DependentUpon>FormFind.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormReplace.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormReplace.Designer.cs">
+      <DependentUpon>FormReplace.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -65,6 +71,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormFind.resx">
       <DependentUpon>FormFind.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormReplace.resx">
+      <DependentUpon>FormReplace.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
