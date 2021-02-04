@@ -9,3 +9,5 @@ E:\Repository\GitHub\PracticalCSharpExamples\Examples\CSharp\Example5\obj\Debug\
 E:\Repository\GitHub\PracticalCSharpExamples\Examples\CSharp\Example5\obj\Debug\Example5.csproj.CoreCompileInputs.cache
 E:\Repository\GitHub\PracticalCSharpExamples\Examples\CSharp\Example5\obj\Debug\Example5.exe
 E:\Repository\GitHub\PracticalCSharpExamples\Examples\CSharp\Example5\obj\Debug\Example5.pdb
+E:\Repository\GitHub\PracticalCSharpExamples\Examples\CSharp\Example5\obj\Debug\Example5.csprojAssemblyReference.cache
+E:\Repository\GitHub\PracticalCSharpExamples\Examples\CSharp\Example5\obj\Debug\Example5.GoToForm.resources
