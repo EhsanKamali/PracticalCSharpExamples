@@ -1,20 +1,265 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace Example6
 {
-    public partial class Form1 : Form
+    public partial class FormMain : Form
     {
-        public Form1()
+        //اول یک متغییر برای معرفی کانکشن میسازیم
+        private SqlConnection SqlConn = new SqlConnection();
+
+        //برای معرفی دستورات
+        private SqlCommand SqlComm = new SqlCommand();
+
+        //برای ایجاد مدیریت کننده برنامه
+        private SqlDataAdapter SqlDA = new SqlDataAdapter();
+
+        //منبع داده که اطلاعات در اون ذخیره میشه و خروجی داده ها در رم ذخیره میشه
+        private DataSet SqlDS = new DataSet();
+
+        //چون به صورت کلی خودش به وجود اومده دیگه نیاز نداریم از روی اون با new ایجاد کنیم
+        private CurrencyManager cr;
+
+        public FormMain()
         {
             InitializeComponent();
+        }
+
+        private void FormMain_Load(object sender, EventArgs e)
+        {
+            //میخوایم وقتی فرم باز میشه اتصال برقرار بشه
+            //برای به دست آوردن این آیتم میشه از روی گرید ارتباط با دیتاست رو بزنیم
+            //تا خودش برامون کد رو بسازه و همون رو کپی کنیم اینجا
+            SqlConn.ConnectionString =
+                @"Data Source=(LocalDB)\MSSQLLocalDB;
+                AttachDbFilename=E:\Repository\GitHub\PracticalCSharpExamples\Examples\CSharp\Example6\TellBook.mdf;
+                Integrated Security=True";
+            //اتصال به بانک اطلاعاتی را باز میکنیم
+            SqlConn.Open();
+            //حالا میگیم بعد از بازکردنش میخوای چیکار کنی؟
+            FillGrid();
+        }
+
+        /// <summary>
+        /// برای پر کردن گرید از این تابع استفاده میکنیم که یک دستور به صورت پیش فرض هم دارد
+        /// </summary>
+        /// <param name="SCommand">متن دستوری که باید فراخوانی کند و پیشفرض اون همرو میاره</param>
+        private void FillGrid(string SCommand = "Select * from TblTell")
+        {
+            //دستوری که میخواهیم اجرا شود را بهش میدیم
+            SqlComm.CommandText = SCommand;
+            //ارتباط اون رو براش مشخص می کنیم
+            SqlComm.Connection = SqlConn;
+            //به آداپتر دستوری که باید اجرا شود را متصل می کنیم
+            SqlDA.SelectCommand = SqlComm;
+            //قبل از اینکه اطلاعات رو بیاریم یکبار اطلاعات داخل رم رو خالی میکنیم
+            //وگرنه در زمان فراخوانی اطلاعات را مجدد زیر اطلاعات قبلی اضافه میکنه
+            SqlDS.Clear();
+            //داده ها را از توی هارد میاره بیرون و توی رم میزاره
+            //میگه از کدوم دیتاست؟ اسم جدول توی رم چی باشه؟ توی هارد رو که زمان ساخت
+            //دیتابیس گفتیم. میگه حالا توی رم اسمش رو چی بزارم؟
+            SqlDA.Fill(SqlDS, "T1");
+            //همه کنترل ها شی به نام DataBinding دارند که اتصال داده اون کنترل رو به
+            //یک منبع داده نشون میده. یعنی مثلا فلان فیلد اطلاعات خودش رو از کجا بیاره
+            //دستور Clear اتصالش رو به منبع داده دیگه ای قطع میکنه و آماده است برای متصل کردن
+            dataGridView1.DataBindings.Clear();
+            //حالا براش یک منبع داده متصل میکنیم
+            //اول میگیم کدوم خصوصیت از این کنترل قراره این منبع داده رو به خودش تخصیص بده
+            //که در گرید ویو اون ویژگی که باید منبع داده رو به خودش تخصیص بده اسمش هست
+            //DataSource
+            //در پارامتر دوم میگه حالا اون منبع داده شما چی هست که ما روی
+            //DataSet که تتنظیم کردیم بهش میدیم که اطلاعات هارد رو آوردیم باهاش روی رم
+            //بعدش میگیم اینجا کلی اطلاعات هست، کدوم بخشش رو میخوای بهش بدی؟
+            //که ما اومدیم گفتیم اسمش توی رم T1 باشه
+            dataGridView1.DataBindings.Add("DataSource", SqlDS, "T1");
+            //همونطور که به کمک دو خط بالا اومدیم به گرید منبع داده تخصیص دادیم
+            //حالا میخوایم به فیلدهای دیگه هم مقدار تخصیص بدیم
+            //چون احتمال میدیم چندبار صدا بزنیم اول قطعش میکنیم
+            textBoxName.DataBindings.Clear();
+            //حالا بهش مقدار میدیم
+            //اول میگیم به کدوم ویژگی اون میخوایم مقدار بدیم
+            //در واقع مثل اینه بگیم TextBoxName.Text برابر است با چه چیزی
+            //از کدوم DataSet
+            //بعدش میگیم کدوم بخش از اون اطلاعات
+            textBoxName.DataBindings.Add("Text", SqlDS, "T1.FirstName");
+            //حالا برای تمام فیلدهامون همین کار رو میکنیم
+            textBoxFamily.DataBindings.Clear();
+            textBoxFamily.DataBindings.Add("Text", SqlDS, "T1.LastName");
+            textBoxTell.DataBindings.Clear();
+            textBoxTell.DataBindings.Add("Text", SqlDS, "T1.PhoneNo");
+            textBoxAddress.DataBindings.Clear();
+            textBoxAddress.DataBindings.Add("Text", SqlDS, "T1.Address");
+
+            //BindingContext
+            //اشیایی که مدیریت کننده کنترل های روی فرم هستند را در خودش ذخیره کرده است
+            //به ازای هر اتصال به منبع داده یک شی از نوع
+            //CurrencyManager
+            //به وجود میاد و در BindingContext فرم قرار میگیرد
+            //و کار اونها مدیریت کردن منبع داده و کنترل های روی فرم است
+            //چون به صورت پیش فرض نمیتونیم بهش اون دیتا رو پاس بدیم اولش cast میکنیم
+            cr = (CurrencyManager)this.BindingContext[SqlDS, "T1"];
+            //خوبیش اینه وقتی برنامه اجرا میشه خودش مستقیم وصل میشه به دیتا
+            //بخاطر همین میریم روی دکمه next و راحت اون رو فراخوانی میکنیم
+        }
+
+        private void buttonNext_Click(object sender, EventArgs e)
+        {
+            //یعنی رکورد جاری در منبع داده T1 رو یکی ببر جلو
+            cr.Position++;
+        }
+
+        private void buttonNew_Click(object sender, EventArgs e)
+        {
+            //قابل ویرایش میکنیم
+            textBoxName.ReadOnly = false;
+            textBoxFamily.ReadOnly = false;
+            textBoxTell.ReadOnly = false;
+            textBoxAddress.ReadOnly = false;
+            //متن اونها رو خالی میکنیم
+            textBoxName.Text = string.Empty;
+            textBoxFamily.Text = string.Empty;
+            textBoxTell.Text = string.Empty;
+            textBoxAddress.Text = string.Empty;
+            //دکمه رو خاموش میکنیم
+            buttonNew.Enabled = false;
+            buttonSave.Enabled = true;
+            //به اولین فیلد پرش کنیم
+            textBoxName.Focus();
+        }
+
+        private void buttonSave_Click(object sender, EventArgs e)
+        {
+            //ابتدا یک command local تعریف میکنیم که با ورود به save ایجاد
+            //میشن و با خروج از save از بین میرن
+            SqlCommand SaveComm = new SqlCommand();
+            //متن فرمان را به آن میدیم
+            //SaveComm.CommandText = @"Insert into TblTell
+            //                        values ('FirstSave','LastSave','0912745896','SaveLocation')";
+            //حالا میخوایم اون رو پارامتری تعریف کنیم
+            SaveComm.CommandText = @"Insert into TblTell
+                                    values (@Name,@Family,@Tell,@Address)";
+            //حالا پارامترها رو مقدار دهی میکنیم
+            //AddWithValue مقدار میده به پارامتر ها به همراه منبع داده اون
+            SaveComm.Parameters.AddWithValue("Name", textBoxName.Text);
+            SaveComm.Parameters.AddWithValue("Family", textBoxFamily.Text);
+            SaveComm.Parameters.AddWithValue("Tell", textBoxTell.Text);
+            SaveComm.Parameters.AddWithValue("Address", textBoxAddress.Text);
+            //برای اون کانکشنش رو مشخص می کنیم
+            SaveComm.Connection = SqlConn;
+            //چون فقط درج میکنیم و مقداری برنمیگردانیم
+            SaveComm.ExecuteNonQuery();
+            //دکمه رو خاموش میکنیم که دوبار نتونه ذخیره کنه
+            buttonSave.Enabled = false;
+            buttonNew.Enabled = true;
+            //غیرقابل ویرایش میکنیم
+            textBoxName.ReadOnly = true;
+            textBoxFamily.ReadOnly = true;
+            textBoxTell.ReadOnly = true;
+            textBoxAddress.ReadOnly = true;
+            //چون میخوایم دوباره اطلاعات را فراخوانی کند
+            FillGrid();
+        }
+
+        private void buttonPre_Click(object sender, EventArgs e)
+        {
+            //یعنی رکورد جاری در منبع داده T1 رو یکی ببر عقب
+            cr.Position--;
+        }
+
+        private void buttonEdit_Click(object sender, EventArgs e)
+        {
+            if (buttonEdit.Text == "Edit")
+            {
+                //قابل ویرایش میکنیم
+                textBoxName.ReadOnly = false;
+                textBoxFamily.ReadOnly = false;
+                //ویرایش روی کلید اصلی بی معنی هست
+                textBoxTell.ReadOnly = true;
+                textBoxAddress.ReadOnly = false;
+                //دکمه رو خاموش میکنیم
+                buttonNew.Enabled = false;
+                buttonSave.Enabled = false;
+                buttonDel.Enabled = false;
+                //نام دکمه رو تغییر میدیم
+                buttonEdit.Text = "Apply";
+                textBoxName.Focus();
+            }
+            else if (buttonEdit.Text == "Apply")
+            {
+                SqlCommand SaveEditComm = new SqlCommand();
+                SaveEditComm.CommandText = @"UPDATE TblTell
+                                            SET
+	                                            FirstName = @FirstName,
+	                                            LastName = @LastName,
+	                                            [Address] = @Address
+                                            WHERE PhoneNo = @PhoneNo";
+                SaveEditComm.Parameters.AddWithValue("FirstName", textBoxName.Text);
+                SaveEditComm.Parameters.AddWithValue("LastName", textBoxFamily.Text);
+                SaveEditComm.Parameters.AddWithValue("Address", textBoxAddress.Text);
+                SaveEditComm.Parameters.AddWithValue("PhoneNo", textBoxTell.Text);
+                SaveEditComm.Connection = SqlConn;
+                SaveEditComm.ExecuteNonQuery();
+                FillGrid();
+                buttonEdit.Text = "Edit";
+                buttonNew.Enabled = true;
+                buttonDel.Enabled = true;
+                //غیرقابل ویرایش میکنیم
+                textBoxName.ReadOnly = true;
+                textBoxFamily.ReadOnly = true;
+                textBoxTell.ReadOnly = true;
+                textBoxAddress.ReadOnly = true;
+            }
+        }
+
+        private void buttonLast_Click(object sender, EventArgs e)
+        {
+            //یعنی رکورد جاری را ببر به تعداد رکوردهای منبع منهای یک که میشه آخرین ایندکس
+            cr.Position = cr.Count - 1;
+        }
+
+        private void buttonDel_Click(object sender, EventArgs e)
+        {
+            DialogResult DelResult;
+            DelResult = MessageBox.Show("Do you want to delete " + textBoxName.Text + " " +
+                textBoxFamily.Text + " ?",
+                "Delete Record", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (DelResult == DialogResult.Yes)
+            {
+                //برای هر مورد یک کامند درست می کنیم و دستورات را برای آن می نویسیم
+                //اینجا هم اول یک کامند درست میکنیم تا بتونیم دستورات رو بنویسیم
+                SqlCommand DelComm = new SqlCommand();
+                //میتونیم حذف رو براساس فیلد کلیدی که اینجا شماره تلفن هست انجام بدیم
+                //اما برای تمرین من همه فیلد ها رو میزارم
+                DelComm.CommandText = @"DELETE FROM TblTell
+                                    WHERE FirstName= @FirstName and
+                                    LastName= @LastName and
+                                    PhoneNo= @PhoneNo and
+                                    [Address]= @Address";
+                DelComm.Parameters.AddWithValue("FirstName", textBoxName.Text);
+                DelComm.Parameters.AddWithValue("LastName", textBoxFamily.Text);
+                DelComm.Parameters.AddWithValue("PhoneNo", textBoxTell.Text);
+                DelComm.Parameters.AddWithValue("Address", textBoxAddress.Text);
+                DelComm.Connection = SqlConn;
+                DelComm.ExecuteNonQuery();
+                FillGrid();
+            }
+        }
+
+        private void buttonFirst_Click(object sender, EventArgs e)
+        {
+            //یعنی رکورد جاری را ببر به اولین رکورد
+            cr.Position = 0;
+        }
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //با این رویداد میخوایم بگیم هرجایی که کلیک کردیم اون بشه رکورد جاری ما
+            //شماره سطر کلیک شده e.RowIndex
+            //شماره ستون کلیک شده e.ColumnIndex
+            //شماره سطری که روی اون کلیک شده رکورد جاری بشه
+            cr.Position = e.RowIndex;
         }
     }
 }
