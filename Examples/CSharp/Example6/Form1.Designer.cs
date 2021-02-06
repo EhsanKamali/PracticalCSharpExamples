@@ -147,6 +147,7 @@ namespace Example6
             this.textBoxFind.Name = "textBoxFind";
             this.textBoxFind.Size = new System.Drawing.Size(212, 20);
             this.textBoxFind.TabIndex = 10;
+            this.textBoxFind.TextChanged += new System.EventHandler(this.textBoxFind_TextChanged);
             // 
             // buttonSearch
             // 
@@ -156,6 +157,7 @@ namespace Example6
             this.buttonSearch.TabIndex = 11;
             this.buttonSearch.Text = "Search";
             this.buttonSearch.UseVisualStyleBackColor = true;
+            this.buttonSearch.Click += new System.EventHandler(this.buttonSearch_Click);
             // 
             // buttonNew
             // 
@@ -240,7 +242,13 @@ namespace Example6
             // 
             // comboBoxSearchBy
             // 
+            this.comboBoxSearchBy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxSearchBy.FormattingEnabled = true;
+            this.comboBoxSearchBy.Items.AddRange(new object[] {
+            "FirstName",
+            "LastName",
+            "PhoneNo",
+            "Address"});
             this.comboBoxSearchBy.Location = new System.Drawing.Point(519, 19);
             this.comboBoxSearchBy.Name = "comboBoxSearchBy";
             this.comboBoxSearchBy.Size = new System.Drawing.Size(212, 21);
@@ -257,6 +265,7 @@ namespace Example6
             this.dataGridView1.Size = new System.Drawing.Size(443, 161);
             this.dataGridView1.TabIndex = 21;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
+            this.dataGridView1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.dataGridView1_KeyUp);
             // 
             // FormMain
             // 

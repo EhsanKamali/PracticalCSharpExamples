@@ -102,12 +102,15 @@ namespace Example6
             cr = (CurrencyManager)this.BindingContext[SqlDS, "T1"];
             //خوبیش اینه وقتی برنامه اجرا میشه خودش مستقیم وصل میشه به دیتا
             //بخاطر همین میریم روی دکمه next و راحت اون رو فراخوانی میکنیم
+
         }
 
         private void buttonNext_Click(object sender, EventArgs e)
         {
             //یعنی رکورد جاری در منبع داده T1 رو یکی ببر جلو
-            cr.Position++;
+            //cr.Position++;
+            //یا میشه با اون تابع جدید نوشتش
+            SetCurrentRec(cr.Position++);
         }
 
         private void buttonNew_Click(object sender, EventArgs e)
@@ -165,11 +168,13 @@ namespace Example6
         private void buttonPre_Click(object sender, EventArgs e)
         {
             //یعنی رکورد جاری در منبع داده T1 رو یکی ببر عقب
-            cr.Position--;
+            //cr.Position--;
+            SetCurrentRec(cr.Position--);
         }
 
+        int CrPosition;
         private void buttonEdit_Click(object sender, EventArgs e)
-        {
+        {            
             if (buttonEdit.Text == "Edit")
             {
                 //قابل ویرایش میکنیم
@@ -184,7 +189,8 @@ namespace Example6
                 buttonDel.Enabled = false;
                 //نام دکمه رو تغییر میدیم
                 buttonEdit.Text = "Apply";
-                textBoxName.Focus();
+                textBoxName.Focus();                
+                CrPosition = cr.Position;
             }
             else if (buttonEdit.Text == "Apply")
             {
@@ -210,13 +216,16 @@ namespace Example6
                 textBoxFamily.ReadOnly = true;
                 textBoxTell.ReadOnly = true;
                 textBoxAddress.ReadOnly = true;
+                SetCurrentRec(CrPosition);
+                cr.Position = CrPosition;
             }
         }
 
         private void buttonLast_Click(object sender, EventArgs e)
         {
             //یعنی رکورد جاری را ببر به تعداد رکوردهای منبع منهای یک که میشه آخرین ایندکس
-            cr.Position = cr.Count - 1;
+            //cr.Position = cr.Count - 1;
+            SetCurrentRec(cr.Count - 1);
         }
 
         private void buttonDel_Click(object sender, EventArgs e)
@@ -250,7 +259,8 @@ namespace Example6
         private void buttonFirst_Click(object sender, EventArgs e)
         {
             //یعنی رکورد جاری را ببر به اولین رکورد
-            cr.Position = 0;
+            //cr.Position = 0;
+            SetCurrentRec(0);
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -260,6 +270,44 @@ namespace Example6
             //شماره ستون کلیک شده e.ColumnIndex
             //شماره سطری که روی اون کلیک شده رکورد جاری بشه
             cr.Position = e.RowIndex;
+        }
+        
+        private void buttonSearch_Click(object sender, EventArgs e)
+        {
+            //میخوایم متن جستجو رو بنویسیم
+            //برای اون با یک عبارت این متن رو میسازیم
+            string SearchScript;
+            SearchScript = "Select * from TblTell where " + comboBoxSearchBy.Text + " Like '%" + textBoxFind.Text + "%'";
+            //موقع نوشتن FillGrid گفتیم میتونیم بهش اسکریپت بدیم و اگر ندادیم همرو بیار
+            //حالا اینجا داریم اون اسکریپتی که ساختیم رو میدیم.
+            FillGrid(SearchScript);
+        }
+
+        private void textBoxFind_TextChanged(object sender, EventArgs e)
+        {
+            //برای اینکه در زمان جستجو با زدن هر کلید خودش سرچ کنه
+            //کلید سرچ رو میاریم توی این بخش که تغییر متن هست
+            buttonSearch_Click(null, null);
+        }
+
+        void SetCurrentRec (int CurrentRec)
+        {
+            if(CurrentRec<0 || CurrentRec>=cr.Count)
+            {
+                return;
+            }
+            else
+            {
+                //در قسمت انتهابب میتونستیم از ستون 0 استفاده کنیم
+                //اما چون می خواهیم روی همون ستون با عثب و جلو رفتن حرکت کنیم
+                //از شماره سلول انتخاب شده استفاده می کنیم
+                dataGridView1.CurrentCell = dataGridView1.Rows[CurrentRec].Cells[dataGridView1.CurrentCell.ColumnIndex];
+            }
+        }
+
+        private void dataGridView1_KeyUp(object sender, KeyEventArgs e)
+        {
+            SetCurrentRec(dataGridView1.CurrentCell.RowIndex);
         }
     }
 }
