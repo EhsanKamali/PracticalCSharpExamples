@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace Example6
@@ -22,6 +24,9 @@ namespace Example6
         //چون به صورت کلی خودش به وجود اومده دیگه نیاز نداریم از روی اون با new ایجاد کنیم
         private CurrencyManager cr;
 
+        //برای ذخیره ابعاد و موقعیت تصویر
+        private Region PicRegion = new Region();
+
         public FormMain()
         {
             InitializeComponent();
@@ -32,9 +37,14 @@ namespace Example6
             //میخوایم وقتی فرم باز میشه اتصال برقرار بشه
             //برای به دست آوردن این آیتم میشه از روی گرید ارتباط با دیتاست رو بزنیم
             //تا خودش برامون کد رو بسازه و همون رو کپی کنیم اینجا
-            SqlConn.ConnectionString =
+            /*SqlConn.ConnectionString =
                 @"Data Source=(LocalDB)\MSSQLLocalDB;
                 AttachDbFilename=E:\Repository\GitHub\PracticalCSharpExamples\Examples\CSharp\Example6\TellBook.mdf;
+                Integrated Security=True";*/
+            //میخوام رشته اتصال را طوری بدم که فایل بانک اطلاعاتی هرجا ذخیره شده بود من متوجه ارتباطم بشم
+            SqlConn.ConnectionString =
+                @"Data Source=(LocalDB)\MSSQLLocalDB;
+                AttachDbFilename=" + Application.StartupPath + @"\TellBook.mdf;
                 Integrated Security=True";
             //اتصال به بانک اطلاعاتی را باز میکنیم
             SqlConn.Open();
@@ -91,6 +101,8 @@ namespace Example6
             textBoxTell.DataBindings.Add("Text", SqlDS, "T1.PhoneNo");
             textBoxAddress.DataBindings.Clear();
             textBoxAddress.DataBindings.Add("Text", SqlDS, "T1.Address");
+            pictureBoxContact.DataBindings.Clear();
+            pictureBoxContact.DataBindings.Add("ImageLocation", SqlDS, "T1.PictureURL");
 
             //BindingContext
             //اشیایی که مدیریت کننده کنترل های روی فرم هستند را در خودش ذخیره کرده است
@@ -102,7 +114,6 @@ namespace Example6
             cr = (CurrencyManager)this.BindingContext[SqlDS, "T1"];
             //خوبیش اینه وقتی برنامه اجرا میشه خودش مستقیم وصل میشه به دیتا
             //بخاطر همین میریم روی دکمه next و راحت اون رو فراخوانی میکنیم
-
         }
 
         private void buttonNext_Click(object sender, EventArgs e)
@@ -130,6 +141,7 @@ namespace Example6
             buttonSave.Enabled = true;
             //به اولین فیلد پرش کنیم
             textBoxName.Focus();
+            buttonBrowse.Enabled = true;
         }
 
         private void buttonSave_Click(object sender, EventArgs e)
@@ -142,13 +154,14 @@ namespace Example6
             //                        values ('FirstSave','LastSave','0912745896','SaveLocation')";
             //حالا میخوایم اون رو پارامتری تعریف کنیم
             SaveComm.CommandText = @"Insert into TblTell
-                                    values (@Name,@Family,@Tell,@Address)";
+                                    values (@Name,@Family,@Tell,@Address,@PictureURL)";
             //حالا پارامترها رو مقدار دهی میکنیم
             //AddWithValue مقدار میده به پارامتر ها به همراه منبع داده اون
             SaveComm.Parameters.AddWithValue("Name", textBoxName.Text);
             SaveComm.Parameters.AddWithValue("Family", textBoxFamily.Text);
             SaveComm.Parameters.AddWithValue("Tell", textBoxTell.Text);
             SaveComm.Parameters.AddWithValue("Address", textBoxAddress.Text);
+            SaveComm.Parameters.AddWithValue("PictureURL", pictureBoxContact.ImageLocation);
             //برای اون کانکشنش رو مشخص می کنیم
             SaveComm.Connection = SqlConn;
             //چون فقط درج میکنیم و مقداری برنمیگردانیم
@@ -161,6 +174,7 @@ namespace Example6
             textBoxFamily.ReadOnly = true;
             textBoxTell.ReadOnly = true;
             textBoxAddress.ReadOnly = true;
+            buttonBrowse.Enabled = false;
             //چون میخوایم دوباره اطلاعات را فراخوانی کند
             FillGrid();
         }
@@ -172,14 +186,16 @@ namespace Example6
             SetCurrentRec(cr.Position--);
         }
 
-        int CrPosition;
+        private int CrPosition;
+
         private void buttonEdit_Click(object sender, EventArgs e)
-        {            
+        {
             if (buttonEdit.Text == "Edit")
             {
                 //قابل ویرایش میکنیم
                 textBoxName.ReadOnly = false;
                 textBoxFamily.ReadOnly = false;
+                buttonBrowse.Enabled = true;
                 //ویرایش روی کلید اصلی بی معنی هست
                 textBoxTell.ReadOnly = true;
                 textBoxAddress.ReadOnly = false;
@@ -189,8 +205,9 @@ namespace Example6
                 buttonDel.Enabled = false;
                 //نام دکمه رو تغییر میدیم
                 buttonEdit.Text = "Apply";
-                textBoxName.Focus();                
+                textBoxName.Focus();
                 CrPosition = cr.Position;
+                buttonBrowse.Enabled = true;
             }
             else if (buttonEdit.Text == "Apply")
             {
@@ -199,12 +216,15 @@ namespace Example6
                                             SET
 	                                            FirstName = @FirstName,
 	                                            LastName = @LastName,
-	                                            [Address] = @Address
+	                                            [Address] = @Address,
+                                                PictureURL = @PictureURL
                                             WHERE PhoneNo = @PhoneNo";
                 SaveEditComm.Parameters.AddWithValue("FirstName", textBoxName.Text);
                 SaveEditComm.Parameters.AddWithValue("LastName", textBoxFamily.Text);
                 SaveEditComm.Parameters.AddWithValue("Address", textBoxAddress.Text);
                 SaveEditComm.Parameters.AddWithValue("PhoneNo", textBoxTell.Text);
+                SaveEditComm.Parameters.AddWithValue("PictureURL",
+                    CopyPic(pictureBoxContact.ImageLocation, textBoxTell.Text));
                 SaveEditComm.Connection = SqlConn;
                 SaveEditComm.ExecuteNonQuery();
                 FillGrid();
@@ -218,6 +238,7 @@ namespace Example6
                 textBoxAddress.ReadOnly = true;
                 SetCurrentRec(CrPosition);
                 cr.Position = CrPosition;
+                buttonBrowse.Enabled = false;
             }
         }
 
@@ -245,11 +266,14 @@ namespace Example6
                                     WHERE FirstName= @FirstName and
                                     LastName= @LastName and
                                     PhoneNo= @PhoneNo and
-                                    [Address]= @Address";
+                                    [Address]= @Address and
+                                    PictureURL = @PictureURL";
                 DelComm.Parameters.AddWithValue("FirstName", textBoxName.Text);
                 DelComm.Parameters.AddWithValue("LastName", textBoxFamily.Text);
                 DelComm.Parameters.AddWithValue("PhoneNo", textBoxTell.Text);
                 DelComm.Parameters.AddWithValue("Address", textBoxAddress.Text);
+                DelComm.Parameters.AddWithValue("PictureURL",
+                    CopyPic(pictureBoxContact.ImageLocation, textBoxTell.Text));
                 DelComm.Connection = SqlConn;
                 DelComm.ExecuteNonQuery();
                 FillGrid();
@@ -271,7 +295,7 @@ namespace Example6
             //شماره سطری که روی اون کلیک شده رکورد جاری بشه
             cr.Position = e.RowIndex;
         }
-        
+
         private void buttonSearch_Click(object sender, EventArgs e)
         {
             //میخوایم متن جستجو رو بنویسیم
@@ -290,9 +314,9 @@ namespace Example6
             buttonSearch_Click(null, null);
         }
 
-        void SetCurrentRec (int CurrentRec)
+        private void SetCurrentRec(int CurrentRec)
         {
-            if(CurrentRec<0 || CurrentRec>=cr.Count)
+            if (CurrentRec < 0 || CurrentRec >= cr.Count)
             {
                 return;
             }
@@ -308,6 +332,87 @@ namespace Example6
         private void dataGridView1_KeyUp(object sender, KeyEventArgs e)
         {
             SetCurrentRec(dataGridView1.CurrentCell.RowIndex);
+        }
+
+        private void pictureBoxContact_Click(object sender, EventArgs e)
+        {
+            //اگر عکس با ابعاد واقعی نبود یعنی تازه کلیک شده آنگاه
+            if (pictureBoxContact.SizeMode == PictureBoxSizeMode.StretchImage)
+            {
+                //ویژگی اون رو برام نگه دار
+                PicRegion = pictureBoxContact.Region;
+                //ابعادش رو به ابعاد واقعی عکس تبدیل کن
+                pictureBoxContact.SizeMode = PictureBoxSizeMode.AutoSize;
+            }
+            else
+            {
+                //ابعاد رو برگردون به مدل کشیده شده
+                pictureBoxContact.SizeMode = PictureBoxSizeMode.StretchImage;
+                //ابعادش رو تنظیم کن
+                pictureBoxContact.Region = PicRegion;
+            }
+        }
+
+        private void buttonBrowse_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.Filter = "BMP|*.bmp|PNG|*.png|All Files|*.*";
+            openFileDialog1.InitialDirectory = System.Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
+            openFileDialog1.Title = "Contact Picture...";
+
+            if (openFileDialog1.ShowDialog() == DialogResult.Cancel)
+            {
+                return;
+            }
+            else
+            {
+                pictureBoxContact.ImageLocation = openFileDialog1.FileName;
+            }
+        }
+
+        /// <summary>
+        /// برنامه ای برای کپی کردن عکس مخاطب
+        /// </summary>
+        /// <param name="SourceFile">مسیر فایل اصلی</param>
+        /// <param name="Key">کلید اصلی برای نامگذاری فایل</param>
+        /// <returns></returns>
+        private String CopyPic(string SourceFile, string Key)
+        {
+            if (SourceFile == "")
+            {
+                return "";
+            }
+            //جایی که نرم افزار از آن اجرا میشه
+            string CurrentPath;
+            //مسیری که بعد از کپی کردن عکس به وجود آمده
+            string NewPath;
+            //آدرس دهی به محل اجرا، جایی که برنامه اجرا می شود
+            CurrentPath = Application.StartupPath + @"\Images\";
+            //میگه اگه اون مسیر وجود ندارد
+            if (System.IO.Directory.Exists(CurrentPath) == false)
+            {
+                //برو از روی اون یک پوشه درست کن
+                Directory.CreateDirectory(CurrentPath);
+            }
+            //اسم فایل را با توجه به شماره موبایل برای فیلد کلیدی استفاده می کنیم
+            NewPath = CurrentPath + Key + SourceFile.Substring(SourceFile.LastIndexOf("."));
+            //کنترل میکنیم اگر قبلا وجود داشته اون رو حذف میکنیم
+            if (File.Exists(NewPath) == true)
+            {
+                File.Delete(NewPath);
+            }
+            //کپی می کنیم
+            File.Copy(SourceFile, NewPath);
+            //خروجی مسیر جدید رو برمیگردونیم
+            return NewPath;
+        }
+
+        private void pictureBoxContact_MouseLeave(object sender, EventArgs e)
+        {
+            //اگر موس از روی عکس کنار رفت
+            //ابعاد رو برگردون به مدل کشیده شده
+            pictureBoxContact.SizeMode = PictureBoxSizeMode.StretchImage;
+            //ابعادش رو تنظیم کن
+            pictureBoxContact.Region = PicRegion;
         }
     }
 }
