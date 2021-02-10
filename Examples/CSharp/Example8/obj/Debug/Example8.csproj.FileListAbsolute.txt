@@ -1,0 +1,11 @@
+E:\Repository\GitHub\PracticalCSharpExamples\Examples\CSharp\Example8\bin\Debug\Example8.exe.config
+E:\Repository\GitHub\PracticalCSharpExamples\Examples\CSharp\Example8\bin\Debug\Example8.exe
+E:\Repository\GitHub\PracticalCSharpExamples\Examples\CSharp\Example8\bin\Debug\Example8.pdb
+E:\Repository\GitHub\PracticalCSharpExamples\Examples\CSharp\Example8\obj\Debug\Example8.Form1.resources
+E:\Repository\GitHub\PracticalCSharpExamples\Examples\CSharp\Example8\obj\Debug\Example8.Properties.Resources.resources
+E:\Repository\GitHub\PracticalCSharpExamples\Examples\CSharp\Example8\obj\Debug\Example8.csproj.GenerateResource.cache
+E:\Repository\GitHub\PracticalCSharpExamples\Examples\CSharp\Example8\obj\Debug\Example8.csproj.CoreCompileInputs.cache
+E:\Repository\GitHub\PracticalCSharpExamples\Examples\CSharp\Example8\obj\Debug\Example8.exe
+E:\Repository\GitHub\PracticalCSharpExamples\Examples\CSharp\Example8\obj\Debug\Example8.pdb
+E:\Repository\GitHub\PracticalCSharpExamples\Examples\CSharp\Example8\obj\Debug\Example8.csprojAssemblyReference.cache
+E:\Repository\GitHub\PracticalCSharpExamples\Examples\CSharp\Example8\obj\Debug\Example8.FormDataControl.resources

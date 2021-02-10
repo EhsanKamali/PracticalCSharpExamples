@@ -1,0 +1,10 @@
+c:\alltamrin\My dic\My dic\obj\Debug\My_dic.Form1.resources
+c:\alltamrin\My dic\My dic\obj\Debug\My_dic.frmedit.resources
+c:\alltamrin\My dic\My dic\obj\Debug\My_dic.Properties.Resources.resources
+c:\alltamrin\My dic\My dic\obj\Debug\My dic.csproj.GenerateResource.Cache
+c:\alltamrin\My dic\My dic\bin\Debug\dicDb.mdf
+c:\alltamrin\My dic\My dic\bin\Debug\dicDb_log.ldf
+c:\alltamrin\My dic\My dic\bin\Debug\My dic.exe
+c:\alltamrin\My dic\My dic\bin\Debug\My dic.pdb
+c:\alltamrin\My dic\My dic\obj\Debug\My dic.exe
+c:\alltamrin\My dic\My dic\obj\Debug\My dic.pdb
