@@ -1,0 +1,11 @@
+E:\Repository\GitHub\PracticalCSharpExamples\Examples\CSharp\Example11\bin\Release\Example11.exe.config
+E:\Repository\GitHub\PracticalCSharpExamples\Examples\CSharp\Example11\bin\Release\Example11.exe
+E:\Repository\GitHub\PracticalCSharpExamples\Examples\CSharp\Example11\bin\Release\Example11.pdb
+E:\Repository\GitHub\PracticalCSharpExamples\Examples\CSharp\Example11\obj\Release\Example11.csprojAssemblyReference.cache
+E:\Repository\GitHub\PracticalCSharpExamples\Examples\CSharp\Example11\obj\Release\Example11.FormMain.resources
+E:\Repository\GitHub\PracticalCSharpExamples\Examples\CSharp\Example11\obj\Release\Example11.FormModify.resources
+E:\Repository\GitHub\PracticalCSharpExamples\Examples\CSharp\Example11\obj\Release\Example11.Properties.Resources.resources
+E:\Repository\GitHub\PracticalCSharpExamples\Examples\CSharp\Example11\obj\Release\Example11.csproj.GenerateResource.cache
+E:\Repository\GitHub\PracticalCSharpExamples\Examples\CSharp\Example11\obj\Release\Example11.csproj.CoreCompileInputs.cache
+E:\Repository\GitHub\PracticalCSharpExamples\Examples\CSharp\Example11\obj\Release\Example11.exe
+E:\Repository\GitHub\PracticalCSharpExamples\Examples\CSharp\Example11\obj\Release\Example11.pdb
