@@ -36,6 +36,11 @@ namespace Example12
             RestartForm();
         }
 
+        /// <summary>
+        /// معرفی دکمه اضافه کردن 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonAddValue_Click(object sender, EventArgs e)
         {
             double? InputNumber;
@@ -51,8 +56,16 @@ namespace Example12
                 listBoxInputNumber.Items.Add(InputNumber);
                 AddCounter();
             }
+
+            textBoxInputNumber.Focus();
+            textBoxInputNumber.SelectAll();
         }
 
+        /// <summary>
+        /// برنامه ریزی عملکرد دکمه محاسبه
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonCalc_Click(object sender, EventArgs e)
         {
             try
@@ -112,6 +125,19 @@ namespace Example12
             {
                 MessageBox.Show("خطایی رخ داده است");
                 throw;
+            }
+        }
+
+        /// <summary>
+        /// جهت معرفی دکمه Enter برای اضافه کردن عدد به لیست
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FormMain_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                buttonAddValue_Click(null, null);
             }
         }
     }

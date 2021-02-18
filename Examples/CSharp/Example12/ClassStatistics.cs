@@ -169,7 +169,7 @@ namespace Example12
                 Sum += DistinctList[i] * CountList[i];
             }
             string TextResult = "";
-            TextResult = "میانگین وزنی :" + (Sum / DistinctList.Count).ToString() + " \n";
+            TextResult = "میانگین وزنی : " + (Sum / DistinctList.Count).ToString() + " \n";
             return TextResult;
         }
 
@@ -188,7 +188,7 @@ namespace Example12
                 Sum *= Math.Pow(DistinctList[i], CountList[i]);
             }
             string TextResult = "";
-            TextResult = "میانگین هندسی :" + ((1 / (double)DistinctList.Count) * Sum).ToString() + " \n";
+            TextResult = "میانگین هندسی : " + ((1 / (double)DistinctList.Count) * Sum).ToString() + " \n";
             return TextResult;
         }
 
@@ -208,7 +208,7 @@ namespace Example12
                 Sum += CountList[i] / DistinctList[i];
             }
             string TextResult = "";
-            TextResult = "میانگین همساز :" + ((1 / (double)DistinctList.Count) * Sum).ToString() + " \n";
+            TextResult = "میانگین همساز : " + ((1 / (double)DistinctList.Count) * Sum).ToString() + " \n";
             return TextResult;
         }
 
@@ -243,7 +243,7 @@ namespace Example12
         public string Variance(List<double> MainList)
         {                        
             string TextResult = "";
-            TextResult = "واریانس :" + CalcVariance(MainList) + " \n";
+            TextResult = "واریانس : " + CalcVariance(MainList) + " \n";
             return TextResult;
         }
 
@@ -255,7 +255,7 @@ namespace Example12
         public string StandardDeviation(List<double> MainList)
         {
             string TextResult = "";
-            TextResult = "انحراف معیار :" + Math.Sqrt(CalcVariance(MainList)).ToString() + "\n";
+            TextResult = "انحراف معیار : " + Math.Sqrt(CalcVariance(MainList)).ToString() + "\n";
             return TextResult;
         }
     }

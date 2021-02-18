@@ -281,11 +281,13 @@ namespace Example12
             this.Controls.Add(this.labelInputNumber);
             this.Controls.Add(this.listBoxInputNumber);
             this.Font = new System.Drawing.Font("B Homa", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "FormMain";
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.RightToLeftLayout = true;
             this.Text = "محاسبه فرمول های آماری";
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.FormMain_KeyUp);
             this.groupBoxFunctions.ResumeLayout(false);
             this.groupBoxFunctions.PerformLayout();
             this.groupBoxResult.ResumeLayout(false);
