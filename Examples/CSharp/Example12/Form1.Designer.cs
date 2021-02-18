@@ -30,25 +30,28 @@ namespace Example12
         private void InitializeComponent()
         {
             this.listBoxInputNumber = new System.Windows.Forms.ListBox();
-            this.listBoxSortedNumber = new System.Windows.Forms.ListBox();
             this.labelInputNumber = new System.Windows.Forms.Label();
-            this.labelSortNumber = new System.Windows.Forms.Label();
             this.buttonClear = new System.Windows.Forms.Button();
             this.buttonAddValue = new System.Windows.Forms.Button();
             this.textBoxInputNumber = new System.Windows.Forms.TextBox();
             this.groupBoxFunctions = new System.Windows.Forms.GroupBox();
-            this.buttonCalc = new System.Windows.Forms.Button();
-            this.groupBoxResult = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.radioButtonArithmeticAvg = new System.Windows.Forms.RadioButton();
-            this.radioButtonWeightedAvg = new System.Windows.Forms.RadioButton();
-            this.radioButtonGeometricAvg = new System.Windows.Forms.RadioButton();
+            this.radioButtonSortList = new System.Windows.Forms.RadioButton();
+            this.radioButtonCountOfSortNumber = new System.Windows.Forms.RadioButton();
             this.radioButtonStandardDeviation = new System.Windows.Forms.RadioButton();
             this.radioButtonVariance = new System.Windows.Forms.RadioButton();
             this.radioButtonHarmonicAvg = new System.Windows.Forms.RadioButton();
-            this.radioButtonCountOfSortNumber = new System.Windows.Forms.RadioButton();
+            this.radioButtonGeometricAvg = new System.Windows.Forms.RadioButton();
+            this.radioButtonWeightedAvg = new System.Windows.Forms.RadioButton();
+            this.radioButtonArithmeticAvg = new System.Windows.Forms.RadioButton();
+            this.buttonCalc = new System.Windows.Forms.Button();
+            this.groupBoxResult = new System.Windows.Forms.GroupBox();
+            this.richTextBoxResult = new System.Windows.Forms.RichTextBox();
+            this.textBoxCount = new System.Windows.Forms.TextBox();
+            this.labelCount = new System.Windows.Forms.Label();
+            this.groupBoxInfo = new System.Windows.Forms.GroupBox();
             this.groupBoxFunctions.SuspendLayout();
             this.groupBoxResult.SuspendLayout();
+            this.groupBoxInfo.SuspendLayout();
             this.SuspendLayout();
             // 
             // listBoxInputNumber
@@ -61,16 +64,6 @@ namespace Example12
             this.listBoxInputNumber.Size = new System.Drawing.Size(218, 372);
             this.listBoxInputNumber.TabIndex = 0;
             // 
-            // listBoxSortedNumber
-            // 
-            this.listBoxSortedNumber.FormattingEnabled = true;
-            this.listBoxSortedNumber.ItemHeight = 23;
-            this.listBoxSortedNumber.Location = new System.Drawing.Point(237, 33);
-            this.listBoxSortedNumber.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.listBoxSortedNumber.Name = "listBoxSortedNumber";
-            this.listBoxSortedNumber.Size = new System.Drawing.Size(218, 188);
-            this.listBoxSortedNumber.TabIndex = 1;
-            // 
             // labelInputNumber
             // 
             this.labelInputNumber.AutoSize = true;
@@ -81,16 +74,6 @@ namespace Example12
             this.labelInputNumber.TabIndex = 2;
             this.labelInputNumber.Text = "اعداد وارده:";
             // 
-            // labelSortNumber
-            // 
-            this.labelSortNumber.AutoSize = true;
-            this.labelSortNumber.Location = new System.Drawing.Point(233, 9);
-            this.labelSortNumber.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelSortNumber.Name = "labelSortNumber";
-            this.labelSortNumber.Size = new System.Drawing.Size(87, 23);
-            this.labelSortNumber.TabIndex = 3;
-            this.labelSortNumber.Text = "اعداد مرتب شده:";
-            // 
             // buttonClear
             // 
             this.buttonClear.Location = new System.Drawing.Point(712, 185);
@@ -100,6 +83,7 @@ namespace Example12
             this.buttonClear.TabIndex = 4;
             this.buttonClear.Text = "شروع مجدد";
             this.buttonClear.UseVisualStyleBackColor = true;
+            this.buttonClear.Click += new System.EventHandler(this.buttonClear_Click);
             // 
             // buttonAddValue
             // 
@@ -110,6 +94,7 @@ namespace Example12
             this.buttonAddValue.TabIndex = 5;
             this.buttonAddValue.Text = "اضافه کردن";
             this.buttonAddValue.UseVisualStyleBackColor = true;
+            this.buttonAddValue.Click += new System.EventHandler(this.buttonAddValue_Click);
             // 
             // textBoxInputNumber
             // 
@@ -120,6 +105,7 @@ namespace Example12
             // 
             // groupBoxFunctions
             // 
+            this.groupBoxFunctions.Controls.Add(this.radioButtonSortList);
             this.groupBoxFunctions.Controls.Add(this.radioButtonCountOfSortNumber);
             this.groupBoxFunctions.Controls.Add(this.radioButtonStandardDeviation);
             this.groupBoxFunctions.Controls.Add(this.radioButtonVariance);
@@ -134,66 +120,27 @@ namespace Example12
             this.groupBoxFunctions.TabStop = false;
             this.groupBoxFunctions.Text = "Functions";
             // 
-            // buttonCalc
+            // radioButtonSortList
             // 
-            this.buttonCalc.Location = new System.Drawing.Point(463, 185);
-            this.buttonCalc.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.buttonCalc.Name = "buttonCalc";
-            this.buttonCalc.Size = new System.Drawing.Size(218, 37);
-            this.buttonCalc.TabIndex = 8;
-            this.buttonCalc.Text = "محاسبه";
-            this.buttonCalc.UseVisualStyleBackColor = true;
+            this.radioButtonSortList.AutoSize = true;
+            this.radioButtonSortList.Location = new System.Drawing.Point(141, 62);
+            this.radioButtonSortList.Name = "radioButtonSortList";
+            this.radioButtonSortList.Size = new System.Drawing.Size(107, 27);
+            this.radioButtonSortList.TabIndex = 17;
+            this.radioButtonSortList.TabStop = true;
+            this.radioButtonSortList.Text = "لیست مرتب شده";
+            this.radioButtonSortList.UseVisualStyleBackColor = true;
             // 
-            // groupBoxResult
+            // radioButtonCountOfSortNumber
             // 
-            this.groupBoxResult.Controls.Add(this.textBox1);
-            this.groupBoxResult.Location = new System.Drawing.Point(238, 230);
-            this.groupBoxResult.Name = "groupBoxResult";
-            this.groupBoxResult.Size = new System.Drawing.Size(692, 269);
-            this.groupBoxResult.TabIndex = 9;
-            this.groupBoxResult.TabStop = false;
-            this.groupBoxResult.Text = "Result";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(6, 30);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(680, 233);
-            this.textBox1.TabIndex = 0;
-            // 
-            // radioButtonArithmeticAvg
-            // 
-            this.radioButtonArithmeticAvg.AutoSize = true;
-            this.radioButtonArithmeticAvg.Location = new System.Drawing.Point(358, 30);
-            this.radioButtonArithmeticAvg.Name = "radioButtonArithmeticAvg";
-            this.radioButtonArithmeticAvg.Size = new System.Drawing.Size(103, 27);
-            this.radioButtonArithmeticAvg.TabIndex = 10;
-            this.radioButtonArithmeticAvg.TabStop = true;
-            this.radioButtonArithmeticAvg.Text = "میانگسن حسابی";
-            this.radioButtonArithmeticAvg.UseVisualStyleBackColor = true;
-            // 
-            // radioButtonWeightedAvg
-            // 
-            this.radioButtonWeightedAvg.AutoSize = true;
-            this.radioButtonWeightedAvg.Location = new System.Drawing.Point(374, 62);
-            this.radioButtonWeightedAvg.Name = "radioButtonWeightedAvg";
-            this.radioButtonWeightedAvg.Size = new System.Drawing.Size(87, 27);
-            this.radioButtonWeightedAvg.TabIndex = 11;
-            this.radioButtonWeightedAvg.TabStop = true;
-            this.radioButtonWeightedAvg.Text = "میانگین وزنی";
-            this.radioButtonWeightedAvg.UseVisualStyleBackColor = true;
-            // 
-            // radioButtonGeometricAvg
-            // 
-            this.radioButtonGeometricAvg.AutoSize = true;
-            this.radioButtonGeometricAvg.Location = new System.Drawing.Point(361, 95);
-            this.radioButtonGeometricAvg.Name = "radioButtonGeometricAvg";
-            this.radioButtonGeometricAvg.Size = new System.Drawing.Size(100, 27);
-            this.radioButtonGeometricAvg.TabIndex = 12;
-            this.radioButtonGeometricAvg.TabStop = true;
-            this.radioButtonGeometricAvg.Text = "میانگین هندسی";
-            this.radioButtonGeometricAvg.UseVisualStyleBackColor = true;
+            this.radioButtonCountOfSortNumber.AutoSize = true;
+            this.radioButtonCountOfSortNumber.Location = new System.Drawing.Point(144, 30);
+            this.radioButtonCountOfSortNumber.Name = "radioButtonCountOfSortNumber";
+            this.radioButtonCountOfSortNumber.Size = new System.Drawing.Size(104, 27);
+            this.radioButtonCountOfSortNumber.TabIndex = 16;
+            this.radioButtonCountOfSortNumber.TabStop = true;
+            this.radioButtonCountOfSortNumber.Text = "تکرار اعداد ترتیبی";
+            this.radioButtonCountOfSortNumber.UseVisualStyleBackColor = true;
             // 
             // radioButtonStandardDeviation
             // 
@@ -228,31 +175,110 @@ namespace Example12
             this.radioButtonHarmonicAvg.Text = "میانگین همساز";
             this.radioButtonHarmonicAvg.UseVisualStyleBackColor = true;
             // 
-            // radioButtonCountOfSortNumber
+            // radioButtonGeometricAvg
             // 
-            this.radioButtonCountOfSortNumber.AutoSize = true;
-            this.radioButtonCountOfSortNumber.Location = new System.Drawing.Point(144, 30);
-            this.radioButtonCountOfSortNumber.Name = "radioButtonCountOfSortNumber";
-            this.radioButtonCountOfSortNumber.Size = new System.Drawing.Size(104, 27);
-            this.radioButtonCountOfSortNumber.TabIndex = 16;
-            this.radioButtonCountOfSortNumber.TabStop = true;
-            this.radioButtonCountOfSortNumber.Text = "تکرار اعداد ترتیبی";
-            this.radioButtonCountOfSortNumber.UseVisualStyleBackColor = true;
+            this.radioButtonGeometricAvg.AutoSize = true;
+            this.radioButtonGeometricAvg.Location = new System.Drawing.Point(361, 95);
+            this.radioButtonGeometricAvg.Name = "radioButtonGeometricAvg";
+            this.radioButtonGeometricAvg.Size = new System.Drawing.Size(100, 27);
+            this.radioButtonGeometricAvg.TabIndex = 12;
+            this.radioButtonGeometricAvg.TabStop = true;
+            this.radioButtonGeometricAvg.Text = "میانگین هندسی";
+            this.radioButtonGeometricAvg.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonWeightedAvg
+            // 
+            this.radioButtonWeightedAvg.AutoSize = true;
+            this.radioButtonWeightedAvg.Location = new System.Drawing.Point(374, 62);
+            this.radioButtonWeightedAvg.Name = "radioButtonWeightedAvg";
+            this.radioButtonWeightedAvg.Size = new System.Drawing.Size(87, 27);
+            this.radioButtonWeightedAvg.TabIndex = 11;
+            this.radioButtonWeightedAvg.TabStop = true;
+            this.radioButtonWeightedAvg.Text = "میانگین وزنی";
+            this.radioButtonWeightedAvg.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonArithmeticAvg
+            // 
+            this.radioButtonArithmeticAvg.AutoSize = true;
+            this.radioButtonArithmeticAvg.Location = new System.Drawing.Point(358, 30);
+            this.radioButtonArithmeticAvg.Name = "radioButtonArithmeticAvg";
+            this.radioButtonArithmeticAvg.Size = new System.Drawing.Size(103, 27);
+            this.radioButtonArithmeticAvg.TabIndex = 10;
+            this.radioButtonArithmeticAvg.TabStop = true;
+            this.radioButtonArithmeticAvg.Text = "میانگسن حسابی";
+            this.radioButtonArithmeticAvg.UseVisualStyleBackColor = true;
+            // 
+            // buttonCalc
+            // 
+            this.buttonCalc.Location = new System.Drawing.Point(463, 185);
+            this.buttonCalc.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.buttonCalc.Name = "buttonCalc";
+            this.buttonCalc.Size = new System.Drawing.Size(218, 37);
+            this.buttonCalc.TabIndex = 8;
+            this.buttonCalc.Text = "محاسبه";
+            this.buttonCalc.UseVisualStyleBackColor = true;
+            this.buttonCalc.Click += new System.EventHandler(this.buttonCalc_Click);
+            // 
+            // groupBoxResult
+            // 
+            this.groupBoxResult.Controls.Add(this.richTextBoxResult);
+            this.groupBoxResult.Location = new System.Drawing.Point(238, 230);
+            this.groupBoxResult.Name = "groupBoxResult";
+            this.groupBoxResult.Size = new System.Drawing.Size(692, 269);
+            this.groupBoxResult.TabIndex = 9;
+            this.groupBoxResult.TabStop = false;
+            this.groupBoxResult.Text = "نتیجه";
+            // 
+            // richTextBoxResult
+            // 
+            this.richTextBoxResult.Location = new System.Drawing.Point(6, 30);
+            this.richTextBoxResult.Name = "richTextBoxResult";
+            this.richTextBoxResult.ReadOnly = true;
+            this.richTextBoxResult.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.richTextBoxResult.Size = new System.Drawing.Size(679, 233);
+            this.richTextBoxResult.TabIndex = 13;
+            this.richTextBoxResult.Text = "";
+            // 
+            // textBoxCount
+            // 
+            this.textBoxCount.Location = new System.Drawing.Point(6, 23);
+            this.textBoxCount.Name = "textBoxCount";
+            this.textBoxCount.Size = new System.Drawing.Size(100, 31);
+            this.textBoxCount.TabIndex = 10;
+            // 
+            // labelCount
+            // 
+            this.labelCount.AutoSize = true;
+            this.labelCount.Location = new System.Drawing.Point(152, 26);
+            this.labelCount.Name = "labelCount";
+            this.labelCount.Size = new System.Drawing.Size(63, 23);
+            this.labelCount.TabIndex = 11;
+            this.labelCount.Text = "تعداد رکورد:";
+            // 
+            // groupBoxInfo
+            // 
+            this.groupBoxInfo.Controls.Add(this.textBoxCount);
+            this.groupBoxInfo.Controls.Add(this.labelCount);
+            this.groupBoxInfo.Location = new System.Drawing.Point(235, 33);
+            this.groupBoxInfo.Name = "groupBoxInfo";
+            this.groupBoxInfo.Size = new System.Drawing.Size(221, 189);
+            this.groupBoxInfo.TabIndex = 12;
+            this.groupBoxInfo.TabStop = false;
+            this.groupBoxInfo.Text = "اطلاعات:";
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(941, 511);
+            this.Controls.Add(this.groupBoxInfo);
             this.Controls.Add(this.groupBoxResult);
             this.Controls.Add(this.buttonCalc);
             this.Controls.Add(this.groupBoxFunctions);
             this.Controls.Add(this.textBoxInputNumber);
             this.Controls.Add(this.buttonAddValue);
             this.Controls.Add(this.buttonClear);
-            this.Controls.Add(this.labelSortNumber);
             this.Controls.Add(this.labelInputNumber);
-            this.Controls.Add(this.listBoxSortedNumber);
             this.Controls.Add(this.listBoxInputNumber);
             this.Font = new System.Drawing.Font("B Homa", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -263,25 +289,21 @@ namespace Example12
             this.groupBoxFunctions.ResumeLayout(false);
             this.groupBoxFunctions.PerformLayout();
             this.groupBoxResult.ResumeLayout(false);
-            this.groupBoxResult.PerformLayout();
+            this.groupBoxInfo.ResumeLayout(false);
+            this.groupBoxInfo.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.ListBox listBoxInputNumber;
-        private System.Windows.Forms.ListBox listBoxSortedNumber;
         private System.Windows.Forms.Label labelInputNumber;
-        private System.Windows.Forms.Label labelSortNumber;
         private System.Windows.Forms.Button buttonClear;
         private System.Windows.Forms.Button buttonAddValue;
         private System.Windows.Forms.TextBox textBoxInputNumber;
         private System.Windows.Forms.GroupBox groupBoxFunctions;
         private System.Windows.Forms.Button buttonCalc;
         private System.Windows.Forms.GroupBox groupBoxResult;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.RadioButton radioButtonStandardDeviation;
         private System.Windows.Forms.RadioButton radioButtonVariance;
         private System.Windows.Forms.RadioButton radioButtonHarmonicAvg;
@@ -289,6 +311,12 @@ namespace Example12
         private System.Windows.Forms.RadioButton radioButtonWeightedAvg;
         private System.Windows.Forms.RadioButton radioButtonArithmeticAvg;
         private System.Windows.Forms.RadioButton radioButtonCountOfSortNumber;
+        private System.Windows.Forms.TextBox textBoxCount;
+        private System.Windows.Forms.Label labelCount;
+        private System.Windows.Forms.GroupBox groupBoxInfo;
+        public System.Windows.Forms.ListBox listBoxInputNumber;
+        private System.Windows.Forms.RadioButton radioButtonSortList;
+        private System.Windows.Forms.RichTextBox richTextBoxResult;
     }
 }
 
