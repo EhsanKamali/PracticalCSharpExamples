@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data;
+﻿using System.Data;
 using System.Data.SqlClient;
 
 namespace Example13
 {
-    class SQLConnectionClass
+    internal class SQLConnectionClass
     {
         //اول یک متغییر برای معرفی کانکشن میسازیم
         private SqlConnection connection = new SqlConnection();
@@ -32,7 +27,6 @@ namespace Example13
         /// <returns></returns>
         public DataTable ReturnRecord(string TableName, string SearchCol, string SearchString)
         {
-
             SearchString = CorrectText(SearchString);
 
             string SearchText = @"SELECT *
@@ -87,11 +81,9 @@ namespace Example13
         /// <summary>
         /// رکورد انتخاب شده را حذف می کند
         /// </summary>
-        /// <param name="RecordId">شماره سریال رکورد را به عنوان کلید اصلی دریافت می کند</param>
-        public void DeleteRecord(string RecordId)
+        /// <param name="Script">اسکریپت مربوط به حذف را به آن می دهیم</param>
+        public void DeleteRecord(string Script)
         {
-            string Script = @"DELETE FROM ReadmeTable
-                                WHERE Id = " + RecordId;
             SqlCommand command = new SqlCommand();
             command.CommandText = Script;
             command.Connection = connection;
@@ -123,10 +115,9 @@ namespace Example13
         /// </summary>
         /// <param name="UserName">نام کاربری</param>
         /// <returns></returns>
-        public string ReturnPassword (string UserName)
-        {           
-
-            string Script = @"SELECT [Password] FROM dbo.Users 
+        public string ReturnPassword(string UserName)
+        {
+            string Script = @"SELECT [Password] FROM dbo.Users
                                 WHERE NAME = '" + UserName + "'";
             SqlCommand command = new SqlCommand();
             command.CommandText = Script;

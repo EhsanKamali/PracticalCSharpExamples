@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Example13
@@ -21,14 +14,12 @@ namespace Example13
         {
             PartyForm pf = new PartyForm();
             pf.ShowDialog();
-
         }
 
         private void buttonUser_Click(object sender, EventArgs e)
         {
             UserForm uf = new UserForm();
             uf.ShowDialog();
-
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)

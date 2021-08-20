@@ -1,21 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Example13
 {
     public partial class PartyForm : Form
     {
-		private SQLConnectionClass SQLcc =
-			new SQLConnectionClass();
+        private SQLConnectionClass SQLcc =
+            new SQLConnectionClass();
 
-		public PartyForm()
+        public PartyForm()
         {
             InitializeComponent();
         }
@@ -24,6 +17,8 @@ namespace Example13
         {
             //this.Hide();
             buttonNew.Enabled = true;
+            buttonDelete.Enabled = true;
+            PartyForm_Load(null, null);
         }
 
         private void buttonNew_Click(object sender, EventArgs e)
@@ -42,32 +37,61 @@ namespace Example13
                 textBoxAddress.Text = string.Empty;
 
                 buttonNew.Enabled = false;
+                buttonDelete.Enabled = false;
             }
-            
         }
 
         private void buttonDelete_Click(object sender, EventArgs e)
         {
-            if (buttonNew.Enabled == true)
+            string Script;
+
+            if (buttonDelete.Enabled == true)
             {
-                MessageBox.Show("Delete record.");
+                Script = @"DELETE dbo.Party
+							WHERE PartyID = " + textBoxID.Text;
+                SQLcc.ModifyRecord(Script);
+                MessageBox.Show("Record is deleted.", "Delete Result", MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
             }
-            else
-            {
-                MessageBox.Show("Do nothing.");
-            }
-        }
+
+			this.partyTableAdapter.Fill(this.cSharpDataBaseDataSet.Party);
+		}
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
+            //برای ثبت مقدار نوع ابتدا مقدار معادل رو به این متغیر میدیم
+            int PartyType;
+            //با این شرط مقدار رو بهش میدیم که اگر شخص بود صفر و شرکت بود 1
+            PartyType = (comboBoxType.Text == "Persone") ? 0 : 1;
             string Script;
+
+            /*از طریق تعریف متغییرهایی مقدار های خالی برای یک فیلد را مدیریت می کنیم
+			 همچنین اگر لازم باشه که قبل و بعدش کوتیشن باشه بهش اضافه می کنیم*/
+            string varTitle =
+                    (textBoxTitle.Text == string.Empty) ? "NULL" : textBoxTitle.Text;
+            string varName =
+                (textBoxName.Text == string.Empty) ? "NULL" : "'" + textBoxName.Text + "'";
+            string varLastName =
+                (textBoxLastName.Text == string.Empty) ? "NULL" : "'" + textBoxLastName.Text + "'";
+            string varNationalCode =
+                (textBoxNationalCode.Text == string.Empty) 
+				? "NULL" : "'" + textBoxNationalCode.Text + "'";
+            string varSex =
+                (textBoxSex.Text == string.Empty) ? "NULL" : "'" + textBoxSex.Text + "'";
+            string varMobile =
+                (textBoxMobile.Text == string.Empty) ? "NULL" : "'" + textBoxMobile.Text + "'";
+            string varPhone =
+                (textBoxPhone.Text == string.Empty) ? "NULL" : "'" + textBoxPhone.Text + "'";
+
+            //اول کنترل میکنیم که دکمه جدید فعاله یا نه. اگر غیر فعال باشه یعنی آیتم جدید
+            //هست و باید وارد بشه و اگر فعاله یعنی داره ویرایش میشه
             if (buttonNew.Enabled == false)
             {
-				Script = @"INSERT INTO dbo.Party
+                Script = @"INSERT INTO dbo.Party
 								(
 									Title,
 									FirstName,
-									LastName,	
+									LastName,
 									Alias,
 									NationalID,
 									Gender,
@@ -110,38 +134,38 @@ namespace Example13
 									VATCertificateValidityDate
 								)
 								VALUES
-								(									
-									" + textBoxTitle.Text + " , " +
-									textBoxName.Text + " , " +
-									textBoxLastName.Text + " , " +
-									"NULL, " +
-									textBoxNationalCode.Text + " , " +
-									textBoxSex.Text + @" , 
-									NULL, 
-									NULL, 
-									NULL, 
-									NULL, " +
-									textBoxMobile.Text + ", " +
-									textBoxPhone.Text + ", " +
-									@"NULL,
-									NULL,
-									NULL,
-									NULL,
-									NULL,
-									NULL,
-									NULL,
-									NULL,
-									NULL,
-									NULL,
-									NULL,
-									NULL,
-									NULL,
-									NULL,
+								(
+									" + varTitle + " , " +
+                                    varName + " , " +
+                                    varLastName + " , " +
+                                    "NULL, " +
+                                    varNationalCode + " , " +
+                                    varSex + @" ,
 									NULL,
 									NULL,
 									NULL,
 									NULL, " +
-									comboBoxType.Text + @", 
+                                    varMobile + ", " +
+                                    varPhone + @",
+                                    NULL,
+									NULL,
+									NULL,
+									NULL,
+									NULL,
+									NULL,
+									NULL,
+									NULL,
+									NULL,
+									NULL,
+									NULL,
+									NULL,
+									NULL,
+									NULL,
+									NULL,
+									NULL,
+									NULL,
+									NULL, " +
+                                    PartyType + @",
 									NULL,
 									NULL,
 									NULL,
@@ -156,28 +180,29 @@ namespace Example13
 									NULL
 								)";
 
-				MessageBox.Show(Script);
-				SQLcc.InsertRecord(Script);
-				buttonNew.Enabled = true;
-				MessageBox.Show("Save new record.");
+                SQLcc.ModifyRecord(Script);
+                buttonNew.Enabled = true;
+                buttonDelete.Enabled = true;
+                MessageBox.Show("New record is saved.", "Saving Result", MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
             }
             else
             {
-				Script = @"UPDATE dbo.Party
+                Script = @"UPDATE dbo.Party
 							SET
-							Title = " + textBoxTitle.Text + ", " +
-							"FirstName = " + textBoxName.Text + ", " +
-							"LastName = " + textBoxLastName.Text + ", " +
-							"Alias = NULL, " +
-							"NationalID = " + textBoxNationalCode.Text + ", " +
-							"Gender = " + textBoxSex.Text + ", " +
-							@"Nationality = NULL,
+							Title = " + varTitle + ", " +
+                            "FirstName = " + varName + ", " +
+                            "LastName = " + varLastName + ", " +
+                            "Alias = NULL, " +
+                            "NationalID = " + varNationalCode + ", " +
+                            "Gender = " + varSex + ", " +
+                            @"Nationality = NULL,
 							Allegiance = NULL,
 							Religion = NULL,
 							Subreligion = NULL,
-							Mobile = " + textBoxMobile.Text + ", " +
-							"Email = " + textBoxPhone.Text + ", " +
-							@"IDNumber = NULL,
+							Mobile = " + varMobile + ", " +
+                            "Email = " + varPhone + ", " +
+                            @"IDNumber = NULL,
 							IDSerial = NULL,
 							FatherName = NULL,
 							BirthPlaceRef = NULL,
@@ -195,7 +220,7 @@ namespace Example13
 							[Group] = NULL,
 							CompanyName = NULL,
 							Number = NULL,
-							[Type] = " + comboBoxType.Text + @", 
+							[Type] = " + PartyType + @",
 							FirstName_EN = NULL,
 							LastName_EN = NULL,
 							CompanyName_EN = NULL,
@@ -208,21 +233,22 @@ namespace Example13
 							EducationDegree = NULL,
 							MarriageDate = NULL,
 							VATCertificateValidityDate = NULL
-	
+
 						WHERE PartyID = " + textBoxID.Text;
 
-				
-
-				SQLcc.ModifyRecord(SQLcc.CorrectText(Script));
-				MessageBox.Show("Update record.");
+                SQLcc.ModifyRecord(Script);
+                MessageBox.Show("Record is updated.", "Saving Result", MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
             }
-        }
+
+			this.partyTableAdapter.Fill(this.cSharpDataBaseDataSet.Party);
+		}
 
         private void PartyForm_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'cSharpDataBaseDataSet.Party' table. You can move, or remove it, as needed.
+            // TODO: This line of code loads data into the 'cSharpDataBaseDataSet.Party' table. 
+			//You can move, or remove it, as needed.
             this.partyTableAdapter.Fill(this.cSharpDataBaseDataSet.Party);
-
         }
     }
 }
