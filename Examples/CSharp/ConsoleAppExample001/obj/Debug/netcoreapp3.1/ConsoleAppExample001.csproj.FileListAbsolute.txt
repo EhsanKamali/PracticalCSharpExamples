@@ -1,0 +1,13 @@
+E:\Repository\GitHub\PracticalCSharpExamples\Examples\CSharp\ConsoleAppExample001\bin\Debug\netcoreapp3.1\ConsoleAppExample001.exe
+E:\Repository\GitHub\PracticalCSharpExamples\Examples\CSharp\ConsoleAppExample001\bin\Debug\netcoreapp3.1\ConsoleAppExample001.deps.json
+E:\Repository\GitHub\PracticalCSharpExamples\Examples\CSharp\ConsoleAppExample001\bin\Debug\netcoreapp3.1\ConsoleAppExample001.runtimeconfig.json
+E:\Repository\GitHub\PracticalCSharpExamples\Examples\CSharp\ConsoleAppExample001\bin\Debug\netcoreapp3.1\ConsoleAppExample001.runtimeconfig.dev.json
+E:\Repository\GitHub\PracticalCSharpExamples\Examples\CSharp\ConsoleAppExample001\bin\Debug\netcoreapp3.1\ConsoleAppExample001.dll
+E:\Repository\GitHub\PracticalCSharpExamples\Examples\CSharp\ConsoleAppExample001\bin\Debug\netcoreapp3.1\ConsoleAppExample001.pdb
+E:\Repository\GitHub\PracticalCSharpExamples\Examples\CSharp\ConsoleAppExample001\obj\Debug\netcoreapp3.1\ConsoleAppExample001.csprojAssemblyReference.cache
+E:\Repository\GitHub\PracticalCSharpExamples\Examples\CSharp\ConsoleAppExample001\obj\Debug\netcoreapp3.1\ConsoleAppExample001.AssemblyInfoInputs.cache
+E:\Repository\GitHub\PracticalCSharpExamples\Examples\CSharp\ConsoleAppExample001\obj\Debug\netcoreapp3.1\ConsoleAppExample001.AssemblyInfo.cs
+E:\Repository\GitHub\PracticalCSharpExamples\Examples\CSharp\ConsoleAppExample001\obj\Debug\netcoreapp3.1\ConsoleAppExample001.csproj.CoreCompileInputs.cache
+E:\Repository\GitHub\PracticalCSharpExamples\Examples\CSharp\ConsoleAppExample001\obj\Debug\netcoreapp3.1\ConsoleAppExample001.dll
+E:\Repository\GitHub\PracticalCSharpExamples\Examples\CSharp\ConsoleAppExample001\obj\Debug\netcoreapp3.1\ConsoleAppExample001.pdb
+E:\Repository\GitHub\PracticalCSharpExamples\Examples\CSharp\ConsoleAppExample001\obj\Debug\netcoreapp3.1\ConsoleAppExample001.genruntimeconfig.cache

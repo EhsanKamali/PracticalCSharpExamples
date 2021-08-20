@@ -45,7 +45,7 @@ namespace Example11
             this.labelID.Location = new System.Drawing.Point(43, 11);
             this.labelID.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelID.Name = "labelID";
-            this.labelID.Size = new System.Drawing.Size(23, 16);
+            this.labelID.Size = new System.Drawing.Size(33, 24);
             this.labelID.TabIndex = 4;
             this.labelID.Text = "ID";
             // 
@@ -55,7 +55,7 @@ namespace Example11
             this.labelTitle.Location = new System.Drawing.Point(43, 47);
             this.labelTitle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelTitle.Name = "labelTitle";
-            this.labelTitle.Size = new System.Drawing.Size(36, 16);
+            this.labelTitle.Size = new System.Drawing.Size(51, 24);
             this.labelTitle.TabIndex = 5;
             this.labelTitle.Text = "Title";
             // 
@@ -65,7 +65,7 @@ namespace Example11
             this.labelDescription.Location = new System.Drawing.Point(43, 79);
             this.labelDescription.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelDescription.Name = "labelDescription";
-            this.labelDescription.Size = new System.Drawing.Size(80, 16);
+            this.labelDescription.Size = new System.Drawing.Size(114, 24);
             this.labelDescription.TabIndex = 6;
             this.labelDescription.Text = "Description";
             // 
@@ -75,7 +75,7 @@ namespace Example11
             this.textBoxId.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxId.Name = "textBoxId";
             this.textBoxId.ReadOnly = true;
-            this.textBoxId.Size = new System.Drawing.Size(132, 22);
+            this.textBoxId.Size = new System.Drawing.Size(132, 30);
             this.textBoxId.TabIndex = 7;
             // 
             // textBoxTitle
@@ -83,11 +83,12 @@ namespace Example11
             this.textBoxTitle.Location = new System.Drawing.Point(138, 43);
             this.textBoxTitle.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxTitle.Name = "textBoxTitle";
-            this.textBoxTitle.Size = new System.Drawing.Size(499, 22);
+            this.textBoxTitle.Size = new System.Drawing.Size(499, 30);
             this.textBoxTitle.TabIndex = 0;
             // 
             // richTextBox1
             // 
+            this.richTextBox1.Font = new System.Drawing.Font("B Homa", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.richTextBox1.Location = new System.Drawing.Point(138, 75);
             this.richTextBox1.Margin = new System.Windows.Forms.Padding(4);
             this.richTextBox1.Name = "richTextBox1";
@@ -118,7 +119,7 @@ namespace Example11
             // 
             // FormModify
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(645, 487);
             this.Controls.Add(this.buttonCancel);
